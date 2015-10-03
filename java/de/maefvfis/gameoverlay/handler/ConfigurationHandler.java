@@ -14,8 +14,6 @@ import java.io.File;
 
 import org.lwjgl.opengl.GL11;
 
-import sun.security.ssl.Debug;
-
 public class ConfigurationHandler {
 
     public static Configuration configuration;
@@ -87,6 +85,9 @@ public class ConfigurationHandler {
 	
 	// Light Overlay Options ENde
 	
+	
+	public static boolean myConfigLogShops = false;
+	public static boolean myConfigHighLightSpawner = false;
     public static boolean myConfigShowGrid = true;
     public static boolean myConfigShowInfoIngameGui = true;
     public static boolean myConfigShowItemUsage = true;
@@ -95,6 +96,15 @@ public class ConfigurationHandler {
     public static int myConfigGridColor = 100;
     public static String myGridSize = "8";
     public static String PlayerGridWhitelist = "";
+    
+    public static String SchematicName = "";
+    public static String SchematicPos1 = "";
+    public static String SchematicPos2 = "";
+    
+    public static String ShopWarp = "";
+    public static String ShopServer = "";
+    
+    
     public static String myAngler = "0";
     
     
@@ -124,6 +134,10 @@ public class ConfigurationHandler {
     {
     	
     	
+    	
+    	ShopWarp = configuration.getString("ShopWarp", Configuration.CATEGORY_GENERAL, ShopWarp, "ShopWarp");
+        ShopServer = configuration.getString("ShopServer", Configuration.CATEGORY_GENERAL, ShopServer, "ShopServer");
+    	
     	MakroString1 = configuration.getString("Makro1", Configuration.CATEGORY_GENERAL, MakroString1, "triggert by MakroKey 1");
     	MakroString2 = configuration.getString("Makro2", Configuration.CATEGORY_GENERAL, MakroString2, "triggert by MakroKey 2");
     	MakroString3 = configuration.getString("Makro3", Configuration.CATEGORY_GENERAL, MakroString3, "triggert by MakroKey 3");
@@ -135,17 +149,24 @@ public class ConfigurationHandler {
     	MakroString9 = configuration.getString("Makro9", Configuration.CATEGORY_GENERAL, MakroString9, "triggert by MakroKey 9");
 
     	
-    	
+    	//myConfigLogShops = configuration.getBoolean("Log Shops", Configuration.CATEGORY_GENERAL, myConfigLogShops, "If true: LohsShopSigns");
     	
         myConfigShowGrid = configuration.getBoolean("Show MiniMap", Configuration.CATEGORY_GENERAL, myConfigShowGrid, "If true: Shows the MiniMap grid");
         myConfigShowInfoIngameGui = configuration.getBoolean("Show chunk info", Configuration.CATEGORY_GENERAL, myConfigShowInfoIngameGui, "If true: Shows the Chunk info");
         myConfigShowItemUsage = configuration.getBoolean("Show item usage", Configuration.CATEGORY_GENERAL, myConfigShowItemUsage, "If true: Shows the item usage");
         myConfigShowEntityPosition = configuration.getBoolean("Show Etity Position", Configuration.CATEGORY_GENERAL, myConfigShowEntityPosition, "If true: Shows the position of Etitys");
-        
+        myConfigHighLightSpawner = configuration.getBoolean("Highlight Spawner", Configuration.CATEGORY_GENERAL, myConfigHighLightSpawner, "If true: Highlights Spawners");
         myAngler = configuration.getString("Angelbot status", Configuration.CATEGORY_GENERAL, myGridSize, "Sets the size of the grid",new String[] { "Off", "Assist", "Auto"});
         //myConfigGridType = configuration.getString("Grid type", Configuration.CATEGORY_GENERAL, myConfigGridType, "Sets the color of the grid",EntityGridOptions.MobStrings);
         //myConfigGridColor = configuration.get(Configuration.CATEGORY_GENERAL, "Grid transparency", myConfigGridColor,"Grid transparency", 1, 100 ).setConfigEntryClass(getSliderClass()).getInt();
         PlayerGridWhitelist = configuration.getString("Grid ignore player", Configuration.CATEGORY_GENERAL, PlayerGridWhitelist, "Players in this list will not be shown. Seperate by ','");
+        
+        
+        SchematicPos1 = configuration.getString("Schematic Pos.1", Configuration.CATEGORY_GENERAL, SchematicPos1, "coords of the 1. position. 'xx,yy,zz'");
+        SchematicPos2 = configuration.getString("Schematic Pos.2", Configuration.CATEGORY_GENERAL, SchematicPos2, "coords of the 2. position. 'xx,yy,zz'");
+        SchematicName = configuration.getString("Schematic Name", Configuration.CATEGORY_GENERAL, SchematicName, "name of the created file");
+        
+        
         
         renderRangeXZ = configuration.get(Configuration.CATEGORY_GENERAL, "LightOverlayRender width:", renderRangeXZ,"LightOverlayRender width", 5, 50 ).setConfigEntryClass(getSliderClass()).getInt();
         updateRate = configuration.get(Configuration.CATEGORY_GENERAL, "LightOverlayRender UpdateRate:", updateRate,"LightOverlayRender UpdateRate", 5, 10 ).setConfigEntryClass(getSliderClass()).getInt();

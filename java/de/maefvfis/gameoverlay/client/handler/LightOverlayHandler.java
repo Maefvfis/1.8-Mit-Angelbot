@@ -1,6 +1,5 @@
 package de.maefvfis.gameoverlay.client.handler;
 
-import sun.security.util.Debug;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraftforge.client.event.RenderBlockOverlayEvent;

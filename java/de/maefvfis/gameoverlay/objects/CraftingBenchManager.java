@@ -4,7 +4,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import sun.security.ssl.Debug;
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
@@ -37,7 +36,6 @@ public class CraftingBenchManager {
 		}
 		
 		if(amount == 0) { return; }
-		Debug.println("Anzahl Herstellen", amount+"");
 		
 		for(int j = 0; j < 9; j++) {
 			
@@ -48,7 +46,6 @@ public class CraftingBenchManager {
 			this.getItemStackFromInventory(recipe, amount);
 			this.click(j+1, mouseAction.leftClick);
 		}
-		Debug.println("Anzahl Clicks", clickcounter + "");
 		
 	}
 	
@@ -63,7 +60,6 @@ public class CraftingBenchManager {
 			}
 			if(amount == 0) { break; }
 			
-			Debug.println("Anzahl Herstellen", amount+"");
 			for(int j = 0; j < 9; j++) {
 				
     			ItemStack recipe = recipes[j];
@@ -77,7 +73,6 @@ public class CraftingBenchManager {
 			
 		}
 		this.clearCraftingBench();
-		Debug.println("Anzahl Clicks", clickcounter + "");
 	}
 	
 	public void clearCraftingBench() {
@@ -88,7 +83,6 @@ public class CraftingBenchManager {
 	public int countInventorySpaceForItem(ItemStack ItemStack) {
 		
 		if(ItemStack.stackSize == 0) {
-			Debug.println("StackSize Null",ItemStack.getDisplayName());
 			return 0;
 		}
 		
@@ -107,13 +101,11 @@ public class CraftingBenchManager {
 				continue;
 			}
 		}
-		Debug.println("Inventory Space", returner+"");
 		return returner;
 		
 	}
 	
 	public void getItemStackFromInventory(ItemStack ItemStack, int amount) {
-		Debug.println("Amount Pickup", amount+"");
 		for(int i = 10; i < 46; i++) { 
 			
 			Slot inventorySlot = (Slot) this.CraftingBench.inventorySlots.get(i);
@@ -146,7 +138,6 @@ public class CraftingBenchManager {
 					this.getItemStackFromInventory(ItemStack,amount);
 					return;
 				}
-				Debug.println("ERROR", "Crafting Fehler 2");
 			}
 		}
 	}
@@ -162,7 +153,6 @@ public class CraftingBenchManager {
 				return i;
 			}
 		}
-		Debug.println("getNextSlot", "Kein Slot Gefunden");
 		return 0;
 	}
 	

@@ -1,6 +1,5 @@
 package de.maefvfis.gameoverlay.client.handler;
 
-import sun.security.ssl.Debug;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.inventory.CreativeCrafting;

@@ -1,13 +1,20 @@
 package de.maefvfis.gameoverlay.client.handler;
 
 
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.tileentity.TileEntitySign;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import de.maefvfis.gameoverlay.client.gui.CreativeInv2;
 import de.maefvfis.gameoverlay.client.gui.ModGuiConfig;
+import de.maefvfis.gameoverlay.client.gui.ChunckViewer.choords;
+import de.maefvfis.gameoverlay.client.schematic.schematic.SchematicSave;
 import de.maefvfis.gameoverlay.client.settings.Keybindings;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
+import de.maefvfis.gameoverlay.objects.CSVSchildManager;
 import de.maefvfis.gameoverlay.objects.ChunkImage;
 import de.maefvfis.gameoverlay.reference.EntityGridOptions;
 import de.maefvfis.gameoverlay.reference.Key;
@@ -33,6 +40,19 @@ public class KeyInputEventHandler {
         if (Keybindings.maptoggle.isPressed()) {
         	//Toggle Map
         	EntityGridOptions.CycleActiveEntity();
+        }
+        
+        if (Keybindings.CsvSave.isPressed()) {
+        	//Toggle Map
+        	//CSVSchildManager.getShopschilder(MathHelper.floor_double(Minecraft.getMinecraft().thePlayer.posX), MathHelper.floor_double(Minecraft.getMinecraft().thePlayer.posZ));
+        	//CSVSchildManager.save_csv();
+        	return Key.CSVSAVEBUTTON;
+        }
+        
+        if (Keybindings.SaveChunk.isPressed())
+        {
+        	new SchematicSave();
+            return Key.SAVESCHEMATIC;
         }
         
         

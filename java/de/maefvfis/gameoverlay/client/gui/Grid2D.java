@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
 import de.maefvfis.gameoverlay.objects.Output;
 import de.maefvfis.gameoverlay.reference.EntityGridOptions;
-import sun.security.ssl.Debug;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;

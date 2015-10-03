@@ -12,7 +12,7 @@ import de.maefvfis.gameoverlay.client.gui.Grid2D;
 import de.maefvfis.gameoverlay.client.gui.InfoIngameGui;
 import de.maefvfis.gameoverlay.client.gui.ShowItemUsage;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
-import sun.security.util.Debug;
+import de.maefvfis.gameoverlay.objects.ShopVergleich;
 @SideOnly(Side.CLIENT)
 
 public class MainTick {
@@ -39,6 +39,10 @@ public class MainTick {
 		if(ConfigurationHandler.myConfigShowGrid == true) {
 			new CopyOfGrid2D();
 		}
+		
+		
+		
+		
 	}
 	
 	

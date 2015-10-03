@@ -4,7 +4,9 @@ package de.maefvfis.gameoverlay.proxy;
 import de.maefvfis.gameoverlay.client.handler.SoundHandler;
 import de.maefvfis.gameoverlay.client.renderer.Events;
 import de.maefvfis.gameoverlay.client.renderer.Renderer;
+import de.maefvfis.gameoverlay.client.renderer.SpawnerHighlight;
 import de.maefvfis.gameoverlay.client.settings.Keybindings;
+import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,7 +20,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.registerKeyBinding(Keybindings.menu);
         ClientRegistry.registerKeyBinding(Keybindings.creativinv);
         ClientRegistry.registerKeyBinding(Keybindings.maptoggle);
-        
+        ClientRegistry.registerKeyBinding(Keybindings.SaveChunk);
         ClientRegistry.registerKeyBinding(Keybindings.makro_1);
         ClientRegistry.registerKeyBinding(Keybindings.makro_2);
         ClientRegistry.registerKeyBinding(Keybindings.makro_3);
@@ -32,8 +34,9 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new Renderer(Minecraft.getMinecraft()));
         FMLCommonHandler.instance().bus().register(new Events());
         
-       
         
+        FMLCommonHandler.instance().bus().register(new SpawnerHighlight());
+        MinecraftForge.EVENT_BUS.register(new SpawnerHighlight());
         
     }
     

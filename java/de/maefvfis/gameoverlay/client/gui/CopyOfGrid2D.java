@@ -18,7 +18,6 @@ import de.maefvfis.gameoverlay.objects.DayTime;
 import de.maefvfis.gameoverlay.objects.Mondphasen;
 import de.maefvfis.gameoverlay.objects.Output;
 import de.maefvfis.gameoverlay.reference.EntityGridOptions;
-import sun.security.ssl.Debug;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.Minecraft;
@@ -104,10 +103,16 @@ public class CopyOfGrid2D  extends GuiScreen {
 				chunkX = ((i1*chunksize))-radius;
 				chunkY = (i2*chunksize)-radius;
 				
-				List<choords> TileEntityCount = CViewer.ListTileEntitysOnChunkChoords(TileEntitySign.class,chunk);
+				
+				//if(ConfigurationHandler.myConfigLogShops) {
+				//	List<choords> TileEntityCount = CViewer.ListTileEntitysOnChunkChoords(TileEntitySign.class,chunk);
+				//}
+				
+				
+				
 				
 				// Add EntityPositions to List
-				List<choords> EntityCount = CViewer.ListEntitysOnChunkChoords(EntityGridOptions.ActiveEntity.EntityClass, chunk, EntityGridOptions.ActiveEntity.WitherSkelett);
+				List<choords> EntityCount = CViewer.ListEntitysOnChunkChoords(EntityGridOptions.ActiveEntity.EntityClass, chunk, EntityGridOptions.ActiveEntity.WitherSkelett,EntityGridOptions.ActiveEntity.IsTile);
 				for(choords choord: EntityCount) {
 					choordsList.add(choord);
 				}

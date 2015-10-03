@@ -1,13 +1,15 @@
 package de.maefvfis.gameoverlay.client.gui;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import sun.security.ssl.Debug;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
@@ -18,7 +20,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -26,8 +30,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.chunk.Chunk;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
+import de.maefvfis.gameoverlay.objects.CSVSchildManager;
 import de.maefvfis.gameoverlay.objects.Output;
 import de.maefvfis.gameoverlay.objects.PlayerTextures;
+import de.maefvfis.gameoverlay.objects.ShopSchild;
 
 public class ChunckViewer {
 	
@@ -102,29 +108,111 @@ public class ChunckViewer {
 	
 	public List<choords> ListTileEntitysOnChunkChoords(Class<?> instance, Chunk chunk) {
 		List<choords> result = new ArrayList<choords>();
+		
 		HashMap chunkTileEntityMap = (HashMap) chunk.getTileEntityMap();
 		Iterator iterator = chunkTileEntityMap.values().iterator();
-
+		TileEntityMobSpawner Spawner;
         while (iterator.hasNext())
         {
             TileEntity tileentity = (TileEntity)iterator.next();
             if (instance.isInstance(tileentity)) {
-            	String text;
-            	text = "";
-            	for( int i = 0; i < ((TileEntitySign) tileentity).signText.length; i++) {
-            		text = text + " | " + i + " " + ((TileEntitySign) tileentity).signText[i];
-            	}
-            	//Debug.println("" + text , "" + ((TileEntitySign) tileentity).signText.length);
-            	
-            	result.add(new choords(tileentity.getPos().getX(),tileentity.getPos().getZ(),tileentity.getPos().getY(),null));
+            	Spawner = (TileEntityMobSpawner)tileentity;
+            	result.add(new choords(MathHelper.floor_double(Spawner.getPos().getX()),MathHelper.floor_double(Spawner.getPos().getZ()),MathHelper.floor_double(Spawner.getPos().getY()),null));
             }
+            
         }
-        
+		
+		
+		
+		
+		
 		
 		return result;
 	}
 	
+	
+	public float extractprice(String string) {
+		
+		string = string.replaceAll("B", "");
+		string = string.replaceAll("S", "");
+		string = string.replaceAll(" ", "");
+		//string = string.replaceAll(".", ",");
+		//Debug.println("",string);
+		return Float.valueOf(string);
+
+		
+		
+	}
+	
+
+	public boolean isShopSign(TileEntitySign Sign) {
+		
+		
+		if(Sign.signText[0] == null || Sign.signText[1] == null || Sign.signText[2] == null || Sign.signText[3] == null) 
+			return false;
+		
+		
+		if(Sign.signText[0].getUnformattedText().replaceAll(" ", "").equalsIgnoreCase(""))
+			return false;
+		
+		if(Sign.signText[3].getUnformattedText().replaceAll(" ", "").equalsIgnoreCase(""))
+			return false;
+		
+		if(!isInteger(Sign.signText[1].getUnformattedText()))
+			return false;
+		
+
+		
+		String preiszeile = Sign.signText[2].getUnformattedText();
+		
+		
+		
+		if(preiszeile.contains(":")) {
+			String[]preise = preiszeile.split(":");
+			if(!istPreis(preise[0]) || !istPreis(preise[1])) 
+				
+				return false;
+			
+			//Debug.println("","" + preise[1]);
+		} else {
+			if(!istPreis(preiszeile)) 
+				return false;
+		}
+		
+		
+		
+		
+		
+		return true;
+		
+	}
+	
+	
+	
+	public boolean istPreis(String string) {
+		
+		if(string.matches("B ([0-9]+).([0-9]+)|S ([0-9]+).([0-9]+)|B ([0-9]+)|S ([0-9]+)|([0-9]+).([0-9]+) B|([0-9]+).([0-9]+) S|([0-9]+) S|([0-9]+) B")) {
+			return true;
+		}
+		
+		
+		return false;
+		
+	}
+	
+	public List<choords> ListEntitysOnChunkChoords(Class<?> instance, Chunk chunk, Boolean IsWither, Boolean IsTile) {
+		
+		if(IsTile) {
+			
+			return ListTileEntitysOnChunkChoords(instance, chunk);
+		} else {
+			return ListEntitysOnChunkChoords(instance, chunk, IsWither);
+		}
+		
+	}
+	
 	public List<choords> ListEntitysOnChunkChoords(Class<?> instance, Chunk chunk, Boolean IsWither) {
+		
 		List<choords> result = new ArrayList<choords>();
 		
 		for (Object o : world.loadedEntityList) {
@@ -137,7 +225,7 @@ public class ChunckViewer {
 							result.add(new choords(MathHelper.floor_double(((EntitySkeleton) o).posX),MathHelper.floor_double(((EntitySkeleton) o).posZ),MathHelper.floor_double(((EntitySkeleton) o).posY),null));
 						}
 					} else if(o instanceof EntityPlayer) {
-						Debug.println("", ((EntityPlayer) o).getName());
+						//Debug.println("", ((EntityPlayer) o).getName());
 						
 						//DedeNator.mach(((EntityPlayer) o));
 						if(!whitelist.contains(((EntityPlayer) o).getName()) && Minecraft.getMinecraft().thePlayer.getName() != ((EntityPlayer) o).getName()) {
@@ -161,17 +249,12 @@ public class ChunckViewer {
 					} else {
 						result.add(new choords(MathHelper.floor_double(((Entity) o).posX),MathHelper.floor_double(((Entity) o).posZ),MathHelper.floor_double(((Entity) o).posY),null));
 					}
-					
-					
-					
-					
-				
 			}
 		}
 		return result;
 	}
 	public List<choords> ListEntitysOnChunkChoords(Class<?> instance, Chunk chunk) {
-		return ListEntitysOnChunkChoords(instance,chunk,false);
+		return ListEntitysOnChunkChoords(instance,chunk,false,false);
 	}
 	public class choords {
 		private final ResourceLocation Steve = new ResourceLocation("textures/entity/steve.png");
@@ -204,6 +287,17 @@ public class ChunckViewer {
 			}
 		}
 		return false;
+	}
+	
+	public static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    return true;
 	}
 	
 }

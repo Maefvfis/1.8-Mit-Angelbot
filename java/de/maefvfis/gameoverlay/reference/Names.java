@@ -8,6 +8,11 @@ public final class Names {
         public static final String CREATIVEINV = "keys.gameoverlay.creativeinv";
         public static final String MAPTOGGLE = "keys.gameoverlay.maptoggle";
         
+        public static final String CSVSAVE = "keys.gameoverlay.csvsave";
+        public static final String SaveChunk = "keys.gameoverlay.csvsave";
+        
+        
+        
         public static final String MAKRO1 = "keys.gameoverlay.makro1";
         public static final String MAKRO2 = "keys.gameoverlay.makro2";
         public static final String MAKRO3 = "keys.gameoverlay.makro3";

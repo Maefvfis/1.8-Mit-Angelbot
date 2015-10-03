@@ -21,6 +21,7 @@ import de.maefvfis.gameoverlay.client.handler.LightOverlayHandler;
 import de.maefvfis.gameoverlay.client.handler.MainTick;
 import de.maefvfis.gameoverlay.client.handler.SoundHandler;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
+import de.maefvfis.gameoverlay.objects.WireSphere;
 import de.maefvfis.gameoverlay.proxy.IProxy;
 import de.maefvfis.gameoverlay.reference.Reference;
 import de.maefvfis.gameoverlay.utility.LogHelper;
@@ -54,6 +55,9 @@ public class GameOverlay {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+    	
+    	WireSphere.initSphere();
+    	
         FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
         MinecraftForge.EVENT_BUS.register(new LightOverlayHandler());
         

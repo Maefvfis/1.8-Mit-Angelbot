@@ -43,8 +43,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
-import sun.security.ssl.Debug;
 import de.maefvfis.gameoverlay.client.crafting.CustomCraftingManager;
 @SideOnly(Side.CLIENT)
 public class CreativeInv2 extends InventoryEffectRenderer
@@ -86,10 +84,7 @@ public class CreativeInv2 extends InventoryEffectRenderer
     protected void handleMouseClick(Slot p_146984_1_, int p_146984_2_, int p_146984_3_, int p_146984_4_)
     {
     	if(p_146984_1_ != null && p_146984_2_ != -999) {
-	    	Debug.println("p_146984_1_", p_146984_1_.slotNumber+"");
-	    	Debug.println("p_146984_2_", p_146984_2_+"");
-	    	Debug.println("p_146984_3_", p_146984_3_+"");
-	    	Debug.println("p_146984_4_", p_146984_4_+"");
+
 	    	
 	    	if(p_146984_1_ != null && p_146984_1_.getHasStack()) {
 	
@@ -107,9 +102,7 @@ public class CreativeInv2 extends InventoryEffectRenderer
 		                if(itemstack2.getItem() == itemstack.getItem() && itemstack.getItemDamage() == itemstack2.getItemDamage()) {
 		                	
 		                	ItemStack[][] RezeptAr = irecipe.getRecipe(itemstack2);
-		                	
-		                	
-		                	Debug.println(irecipe.getClass().getName(),irecipe.getClass().getName() + " " + itemstack2.getItemDamage());
+		                
 		                	
 		                	
 		                	if(irecipe.getRecipe(itemstack2) != null) {
@@ -120,7 +113,6 @@ public class CreativeInv2 extends InventoryEffectRenderer
 		                				recipefield.setInventorySlotContents((i * 3) + ii, null);
 		                				ItemStack Rezeptitem = RezeptAr[i][ii];
 		                				if(Rezeptitem != null) {
-		                					Debug.println(i + "/" + ii, Rezeptitem.getDisplayName()+ " " +Rezeptitem.getItemDamage());
 		                					Rezeptitem.stackSize = 1;
 		                					
 		                					if(Rezeptitem.getItemDamage() == 32767) {
@@ -135,8 +127,7 @@ public class CreativeInv2 extends InventoryEffectRenderer
 		                		
 		                		
 		                	
-			                	Debug.println("itemstack", itemstack.getDisplayName()+"");
-			            		
+
 			                	break;
 		                	}
 		                }

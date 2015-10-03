@@ -2,12 +2,11 @@ package de.maefvfis.gameoverlay.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import sun.security.ssl.Debug;
 import de.maefvfis.gameoverlay.objects.DayTime;
 import de.maefvfis.gameoverlay.objects.Mondphasen;
+import de.maefvfis.gameoverlay.objects.ShopVergleich;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
@@ -81,7 +80,12 @@ public class InfoIngameGui extends GuiScreen {
 		String[] splits = mc.debug.split(",");
 		fontRender.drawStringWithShadow(splits[0], 5, currentY,0xffffff);
 		currentY += 10;
+		
+		// Shop Vergleich
+		ShopVergleich.ShowShopInfo(currentY, fontRender);
 
+		currentY += 10;
+		
 
 	}
 }

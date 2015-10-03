@@ -25,8 +25,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 import org.lwjgl.input.Keyboard;
 
-import sun.security.ssl.Debug;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -1,6 +1,5 @@
 package de.maefvfis.gameoverlay.objects;
 
-import sun.security.ssl.Debug;
 
 public class DayTime {
 	public static String getTimeString(Long ltime) {

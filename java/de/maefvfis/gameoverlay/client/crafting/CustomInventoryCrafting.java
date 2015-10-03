@@ -1,7 +1,6 @@
 package de.maefvfis.gameoverlay.client.crafting;
 
 
-import sun.security.ssl.Debug;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;

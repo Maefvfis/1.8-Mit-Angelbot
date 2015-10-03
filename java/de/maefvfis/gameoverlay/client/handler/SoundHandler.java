@@ -1,6 +1,6 @@
 package de.maefvfis.gameoverlay.client.handler;
 
-import com.sun.jmx.snmp.Timestamp;
+
 
 import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.client.Minecraft;
@@ -37,7 +37,6 @@ import de.maefvfis.gameoverlay.client.gui.InfoIngameGui;
 import de.maefvfis.gameoverlay.client.gui.ShowItemUsage;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
 import de.maefvfis.gameoverlay.utility.LogHelper;
-import sun.security.util.Debug;
 @SideOnly(Side.CLIENT)
 
 
@@ -66,6 +65,7 @@ public class SoundHandler {
 	//public void onRenderChunkViewer(RenderGameOverlayEvent.Text event) {
 	@SubscribeEvent(priority=EventPriority.NORMAL)
 	public void onRenderChunkViewer(RenderGameOverlayEvent.Text event) {
+		
 		
 		if(mc.gameSettings.showDebugInfo || !mc.inGameHasFocus) 
 			return;

@@ -7,7 +7,6 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import de.maefvfis.gameoverlay.objects.CraftingBenchManager;
-import sun.security.ssl.Debug;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
